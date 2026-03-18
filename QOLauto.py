@@ -101,7 +101,7 @@ def run():
     
     nurse = screenshot({'top':710+boundschange,'left':835,'width':250,'height':50})
 
-    nurses = ['lefebvre','jessica', 'linda', 'proulx']
+    nurses = ['lefebvre','jessica', 'linda', 'proulx','labrecque']
     for i in nurses:
         if i in nurse.lower():
             nurse = i
@@ -112,7 +112,7 @@ def run():
 
     prescriber = screenshot({'top':710+boundschange,'left':1323,'width':300,'height':50})
 
-    prescribers = ['ariane','vicky','catarina','mcgraw']
+    prescribers = ['ariane','vicky','catarina','mcgraw','dionne']
     for i in prescribers:
         if i in prescriber.lower():
             prescriber = i
@@ -145,6 +145,9 @@ def run():
     ag.hotkey('ctrl','w')
     sleep(0.25)
     ag.press('esc')
+    sleep(0.25)
+    ag.scroll(500)
+
     
     #Open EMR calendar view
     sleep(0.25)
@@ -162,6 +165,9 @@ def run():
     for i in range(len(name.split(' '))):
         #Copy paste to allow special characters
         if not name.split(' ')[i] or acroindex >= len(acronym):
+            continue
+        if acroindex != 0 and acroindex != len(acronym)-1:
+            acroindex+= 1
             continue
         if name.split(' ')[i][0].upper() == acronym[acroindex]:
             towrite = name.split(' ')[i]+' '
@@ -187,10 +193,10 @@ def run():
     #Open form
     ag.write('\n')
     sleep(0.25)
-    ag.moveTo(1881,513)
-    ag.click()
+    ag.click(1881,513)
     sleep(0.1)
     ag.moveTo(110,452)
+    ag.click()
     sleep(0.1)
     ag.moveTo(54,452)
     ag.click()
@@ -199,10 +205,10 @@ def run():
     sleep(0.1)
     ag.moveTo(911,1047)
     ag.click()
-    sleep(0.75)
+    sleep(0.95)
     ag.moveTo(321,206)
     ag.click()
-    sleep(0.4)
+    sleep(0.6)
     ag.write('\n')
     sleep(0.5)
 

@@ -1,0 +1,4 @@
+Ht, hematocrit; 
+GR nucléés; 109/L, x109/L, 10*9/L, 10E9/L, x10E9/L, E9/L
+Granulo immat; 109/L, x109/L, 10*9/L, 10E9/L, x10E9/L, E9/L
+

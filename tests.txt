@@ -1,5 +1,5 @@
-GR, RBC
-GB, WBC
+GR, RBC, rbc count, r b c count, ÉRYTHROCYTES, globules rouges
+GB, WBC, WBC COUNT, w b c count, Globules blancs
 Hb, HGB, hemoglobin
 VGM, MCV, rbc indices: mcv
 CHGM, CGMH, MCHC,  mchc
@@ -10,50 +10,50 @@ VPM, mpv
 Neutrophiles, Neutrophils, Neutro
 Lymphocytes, Lympho
 Monocytes, Mono
-Eosinophiles, Éosino, EOSINOPHILS, Eosino
+Eosinophiles, Éosino, EOSINOPHILS, Eosino, éosinophiles #
 Basophiles, Baso, BASOPHILS
 
-Creatinine
-Sodium
+Creatinine, Creat
+Sodium, Na (sodium), Na
 Chlorure, Chloride
-Potassium
-Magnesium
-ALT, ALANINE TRANSAMINASE (ALT)
+Potassium, K (potassium), K
+Magnesium, Mg
+ALT, ALANINE TRANSAMINASE (ALT), SGPT (ALT), Alanine Aminotransferase
 Albumine
 Calcium
 Calcium corrige
 
 Fer, iron
-TIBC
+TIBC, Capacité de fixation du fer
 Saturation du fer, saturation
 Ferritine, ferritin
 B12, vitamin b12
 Vitamine D 25 OН, 25 Vitamin D, Vit-D, 25-HYDROXY VITAMIN D
 
-hs-CRP, high SENSITIVITY crp
+hs-CRP, high SENSITIVITY crp, Protéine C réactive; Sensibilité
 Protéine C reactive, c-reactive protein, proteine C reactive
 
 HbA1c, Hb A1c, hemoglobin a1c, HbAlc, Hb Alc, hemoglobin alc
-Insuline, insulin, insulin fasting
-Glucose a jeun, Glucose fasting, Glucose serum fasting, Glucose Sérum à jeun, Glucose Serum a jeun, Glucose Préprandial
+Insuline, insulin, insulin fasting, INSULINE AC
+Glucose a jeun, Glucose fasting, Glucose serum fasting, Glucose Sérum à jeun, Glucose Serum a jeun, Glucose Préprandial, GLUCOSE AC, glucose, glu fast
 Urate, Uric acid, acide urique
 
-TSH, THYROID STIMULATING HORMONE
-T3 libre
-T4 libre
+TSH, THYROID STIMULATING HORMONE, T.S.H. (ULTRA SENSITIVE)
+T3 libre, t3 free, free t3
+T4 libre, t4 free, free t4
 Anticorps anti-peroxydase thyroïdienne
 Anticorps des récepteurs de TSH
 T3 inverse
 T3 total
 
-Cholesterol, Cholesterol Total
+Cholesterol, Cholesterol Total, CHOL. TOTAL
 Cholesterol LDL (direct), LDL-Cholesterol, LDL Cholesterol
-Cholesterol LDL (calculé), LDL Cholesterol Calc, LDL CHOLESTEROL (CALCULATED)
-ApoA1
+Cholesterol LDL (calculé), LDL Cholesterol Calc, LDL CHOLESTEROL (CALCULATED), LDL CHOL. CALC, ldl
+ApoA1, Apolipoprotéine A-1
 Apolipoprotéine B, Apo-B Quantitation, ApoB, apolipoprotein B
 Ratio Apo-B / Apo-A1
-Triglycérides, Triglycerides
-Cholesterol HDL, HDL-Cholesterol, HDL Cholesterol
+Triglycérides, Triglycerides, triglyceride
+Cholesterol HDL, HDL-Cholesterol, HDL Cholesterol, hdl, HDL CHOL
 LP(a)
 LDLp
 
@@ -63,15 +63,23 @@ Cortisol, salive
 FSH
 LH
 Progesterone, Progestérone
-Estradiol
+Estradiol, Oestradiol
 Prolactine, prolactin
-Testosterone libre, Testostérone libre calculée, Testosterone free cal, free testosterone, TESTOSTERONE-FREE
-Testosterone, Testostérone LC-MS/MS, Testosterone Total
+Testosterone libre, Testostérone libre calculée, Testosterone free cal, free testosterone, TESTOSTERONE-FREE, TESTOS. LIBRE
+Testosterone, Testostérone LC-MS/MS, Testosterone Total, TESTOS. TOTALE
 SHBG
 DHEA-S, DHEAS, DHEA-sulfate
+serum B-HCG, HCG sous-unité bêta, BHCG Quant, HCG intacte+sous-unité bêta
 
 IgA
 IgG
 IgA total
 DGP-IgA
-DGO-IgG
+DGP-IgG
+#################################################
+Ht, hematocrit, HCT
+GR nucléés, Nucleated RBC 
+Granulo immat, Immature Granulocytes, Imm Granulocyte
+DFG Estimé/1,73m2 (prédite), egfr, GFR est
+Cholestérol non HDL, Non-HDL-C, Non HDL Cholesterol, Chol (Non-HDL)
+Cholestérol total/C-HDL, Chol/HDL Ratio, Ratio Chol tot./Chol-HDL

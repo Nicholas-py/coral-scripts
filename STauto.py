@@ -113,7 +113,7 @@ def run():
 
     prescriber = screenshot({'top':710+boundschange,'left':1323,'width':300,'height':50})
 
-    prescribers = ['ariane','vicky','catarina','mcgraw']
+    prescribers = ['ariane','vicky','catarina','mcgraw','dionne','anais']
     for i in prescribers:
         if i in prescriber.lower():
             prescriber = i
@@ -133,15 +133,15 @@ def run():
     ag.click()
 
     #Save
-    sleep(1)
+    sleep(1.2)
     ag.hotkey('ctrl','p')
     sleep(0.4)
     ag.write('\n')
-    sleep(1.3) #at minimum
+    sleep(1.5) #at minimum
     string = acronym + '_ST_'+month[0:3]+str(day)
     print('Filename:',string)
     ag.write(string)
-    sleep(0.49)
+    sleep(0.79)
     ag.write('\n')
     sleep(0.25)
     ag.write('\n')
@@ -151,6 +151,7 @@ def run():
     #Open EMR calendar view
     sleep(0.1)
     ag.hotkey('ctrl','w')
+    sleep(0.1)
     ag.hotkey('ctrl','1')
     ag.moveTo(115,178)
     sleep(0.2)
@@ -174,6 +175,9 @@ def run():
     for i in range(len(name.split(' '))):
         #Copy paste to allow special characters
         if not name.split(' ')[i] or acroindex >= len(acronym):
+            continue
+        if acroindex != 0 and acroindex != len(acronym)-1:
+            acroindex+= 1
             continue
         if name.split(' ')[i][0].upper() == acronym[acroindex]:
             towrite = name.split(' ')[i]+' '
@@ -211,10 +215,10 @@ def run():
     sleep(0.1)
     ag.moveTo(911,1047)
     ag.click()
-    sleep(0.75)
+    sleep(1)
     ag.moveTo(321,206)
     ag.click()
-    sleep(0.49)
+    sleep(0.8)
     ag.write('\n')
     sleep(0.5)
 
@@ -227,7 +231,7 @@ def run():
     ag.write('ST - '+month[0:3]+' '+str(day)+' ' + str(year))
     ag.press('tab')
     ag.write('Sunday, '+str(day)+' '+month+' '+str(year))
-    sleep(0.1)
+    sleep(0.2)
 
     #Add providers
     ag.moveTo(894,633)

@@ -75,3 +75,10 @@ U/mL
 g/L
 U/mL, IU/mL
 U/mL, IU/mL
+IU/L, U/L
+
+
+109/L, x109/L, 10*9/L, 10E9/L, x10E9/L, E9/L
+109/L, x109/L, 10*9/L, 10E9/L, x10E9/L, E9/L
+mL/min/, mL/min
+mmol/L, mmol
