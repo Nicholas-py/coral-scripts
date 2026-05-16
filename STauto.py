@@ -2,6 +2,7 @@ import pyautogui as ag
 import pytesseract as pt
 import time
 from dateutil.parser import parse
+from dateutil.relativedelta import relativedelta
 from mss import mss
 import numpy as np
 import matplotlib.pyplot as plt
@@ -45,13 +46,19 @@ print('File explorer defaults to the downloads page')
 def run():
     global lasttime, times, sleeptally, lastdate
     if lastdate:
-        print('Prev date was', lastdate)
+        print('Prev date was', lastdate.strftime("%B"),lastdate.day, lastdate.year)
     startdate = input('Date of form: ')
-    if startdate:
-        lastdate = startdate
+    formname = input('Form initials: ').upper()
+    if not formname:
+        formname = 'ST'
+    if startdate and startdate in '1234567891011':
+        lastdate += relativedelta(days=int(startdate))
+        date = lastdate
+    elif startdate:
         date = parse(startdate)
+        lastdate = date
     elif lastdate:
-        date = parse(lastdate)
+        date = lastdate
     else:
         raise Exception("No date provided")
     month = date.strftime("%B")
@@ -62,7 +69,8 @@ def run():
     print('Will take over mouse in 2 seconds, please hover over the member link')
     sleep(2)
 
-
+    linkpos = ag.position()
+    
     sleeptally = 0
     starttime = time.time()
     lasttime = starttime
@@ -70,10 +78,17 @@ def run():
     ag.click()
 
     #Wait for website to load - important!
-    sleep(1.8)
+    sleep(2.5)
 
-    namebounds = {'top':350,'left':540,'width':500,'height':50}
-    name = screenshot(namebounds).strip().replace('-',' ')
+    pos = ag.locateCenterOnScreen('copybutton.png')
+    ag.moveTo(pos)
+    ag.move(0,10)
+    ag.click()
+    sleep(0.1)
+    name = pyperclip.paste().title()
+    
+    #namebounds = {'top':350,'left':540,'width':500,'height':50}
+    #name = screenshot(namebounds).strip().replace('-',' ')
 
     trashfound = ['oO','[9', '(9','(0','(Q','{Q']
     for i in trashfound:
@@ -83,26 +98,27 @@ def run():
     acronym = ''
     maybestake = ''
     for i in name.split(' '):
-        if len(i) > 0 and i[0] in letters:
-            if i == name.split(' ')[-1]:
-                if not ((len(i) == 2 and 'aeiou' not in i) or (len(i) == 1)):
-                    acronym += i[0]
-            else:
-                acronym += i[0]
+        if len(i) > 1 and i[0] in letters:
+            acronym += i[0]
         else:
             maybestake = i
     print(name, acronym)
 
-    sponsor = screenshot({'top':435,'left':552,'width':400,'height':50})
-    if "sponsored" in sponsor.lower():
-        boundschange = 30
-        print("Is sponsored!")
-    else:
-        boundschange = 0
+    if name in ['Josée St-Onge', 'micheal pucyk', 'Yuan Chu Zi Lao', 'Nancy Da Silva']:
+        print('\n MEMBER IS CURSED.\n')
+        return
     
-    nurse = screenshot({'top':710+boundschange,'left':835,'width':250,'height':50})
+    sponsor = screenshot({'top':435,'left':552,'width':400,'height':50})
+    if 'ponsored' in sponsor:
+        boundschange = 60
+        print(sponsor)
+    else:
+        boundschange = 30
 
-    nurses = ['lefebvre','jessica', 'linda', 'proulx','labrecque','merat']
+    nurseloc = ag.locateCenterOnScreen('nurse.png',confidence = 0.9)
+    nurse = screenshot({'top':nurseloc.y +30,'left':nurseloc.x+20,'width':250,'height':50})
+
+    nurses = ['lefebvre','jessica', 'linda', 'proulx','labrecque','merat','silva','st-onge','truong']
     for i in nurses:
         if i in nurse.lower():
             nurse = i
@@ -111,11 +127,12 @@ def run():
         print('Nurse',nurse,'not known (may be none)')
         nurse = None
 
-    prescriber = screenshot({'top':710+boundschange,'left':1323,'width':300,'height':50})
+    precloc = ag.locateCenterOnScreen('prescriber.png',confidence=0.9)
+    prescriber = screenshot({'top':precloc.y +30,'left':precloc.x+2,'width':250,'height':50})
 
-    prescribers = ['ariane','vicky','catarina','mcgraw','dionne','anais']
+    prescribers = ['ariane','vicky','catarina','mcgraw','dionne','anais','duong','latulippe','keller','eisma']
     for i in prescribers:
-        if i in prescriber.lower():
+        if i.lower() in prescriber.lower():
             prescriber = i
             break
     else:
@@ -128,6 +145,7 @@ def run():
     
     #Navigate to form
     ag.hotkey('ctrl', 'w')
+    ag.moveTo(linkpos)
     ag.move(0,27)
     sleep(0.2)
     ag.click()
@@ -137,8 +155,8 @@ def run():
     ag.hotkey('ctrl','p')
     sleep(0.4)
     ag.write('\n')
-    sleep(1.5) #at minimum
-    string = acronym + '_ST_'+month[0:3]+str(day)
+    sleep(2.3) #at minimum
+    string = acronym + '_'+formname+'_'+month[0:3]+str(day)
     print('Filename:',string)
     ag.write(string)
     sleep(0.79)
@@ -158,13 +176,6 @@ def run():
     ag.click()
     sleep(0.2)
     
-    if name == 'Nathalie Gagnon':
-        print("WARNING: There are two members with this name. Please enter manually.")
-        return
-    if 'Cété' in name:
-        print('Replacing \'Cété\' with Côté')
-        name = name.replace('Cété', 'Côté')
-
     section('Open MYLE')
     
     #Find the member
@@ -183,16 +194,28 @@ def run():
             towrite = name.split(' ')[i]+' '
             if "'" in towrite:
                 towrite = towrite.split("'")[0]
-
+                if i > 1 and len(name.split(' ')[i-1]) > 1:
+                    towrite = name.split(' ')[i-1]+' '
+                    
             acroindex += 1
         else:
             continue
         pyperclip.copy(towrite)
-        ag.hotkey('ctrl','v')
         sleep(0.1)
+        ag.hotkey('ctrl','v')
+        sleep(0.2)
 
     ag.moveTo(135,366)
     sleep(0.8)
+
+    paticons = ag.locateAllOnScreen('paticon.png')
+    number = 0
+    for i in paticons:
+        number += 1
+        if number > 1:
+            raise Exception("Multiple Patients Found")
+    if number == 0:
+        raise Exception("No patients found")
     ag.click()
 
     section('Get member info')
@@ -215,7 +238,7 @@ def run():
     sleep(0.1)
     ag.moveTo(911,1047)
     ag.click()
-    sleep(1)
+    sleep(2)
     ag.moveTo(321,206)
     ag.click()
     sleep(0.8)
@@ -228,7 +251,7 @@ def run():
     ag.click()
     ag.write('Membre - Coral App')
     ag.press('tab')
-    ag.write('ST - '+month[0:3]+' '+str(day)+' ' + str(year))
+    ag.write(formname+' - '+month[0:3]+' '+str(day)+' ' + str(year))
     ag.press('tab')
     ag.write('Sunday, '+str(day)+' '+month+' '+str(year))
     sleep(0.2)
@@ -238,17 +261,23 @@ def run():
     ag.click()
     if nurse:
         ag.write(nurse)
-        sleep(0.5)
+        sleep(0.7)
         ag.write('\n')
     if prescriber:
         ag.write(prescriber)
-        sleep(0.5)
+        sleep(0.7)
         ag.write('\n')
     ag.moveTo(1610,573)
     ag.click()
 
     section('Get document')
-    
+    sleep(0.2)
+    ag.click(1790,1101) #accept
+    sleep(0.8)
+    ag.click(1700,1101) #cancel
+    sleep(0.2)
+    ag.click(1308, 399) #refresh
+    pyperclip.copy('')
     print('Done in',round(time.time()-starttime,5),'seconds.')
     print()
     #for i in times:
